@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cluster-tools
+spec:
+  containers:
+    - name: cluster-tools
+      image: gcr.io/silkrode-golang/cluster-tools
+      args:
+        - sleep
+        - "1000000"
