@@ -8,4 +8,4 @@ spec:
       image: gcr.io/silkrode-golang/cluster-tools
       args:
         - sleep
-        - "1000000"
+        - "infinity"
