@@ -1,0 +1,13 @@
+image: docker:stable-dind
+
+stages:
+  - build
+
+
+build_image_job:
+  stage: build
+  image: google/cloud-sdk
+  tags:
+    - docker
+  script:
+    - docker version
