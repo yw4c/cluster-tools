@@ -7,7 +7,7 @@ stages:
 build_image_job:
   stage: build
   image: google/cloud-sdk
-  tags:
-    - docker
+  # tags:
+  #   - docker
   script:
     - docker version
