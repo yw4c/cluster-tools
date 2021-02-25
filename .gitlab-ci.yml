@@ -1,8 +1,13 @@
-image: docker:stable-dind
+image: docker:19.03.1
+services:
+- docker:19.03.1-dind
 
 stages:
   - build
 
+variables:
+  IMAGE_NAME: "yw4code/cluster-tool"
+  DOCKER_HOST: tcp://docker:2375
 
 build_image_job:
   stage: build
@@ -11,3 +16,4 @@ build_image_job:
   #   - docker
   script:
     - docker version
+    - docker build -t "$IMAGE_NAME:latest" .
