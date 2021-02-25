@@ -1,4 +1,10 @@
-image: docker:stable-dind
+image: docker:git
+services:
+  - docker:dind
+variables:
+  DOCKER_DRIVER: overlay
+
+
 
 stages:
   - build
@@ -9,5 +15,6 @@ variables:
 build_image_job:
   stage: build
   script:
+    - export DOCKER_HOST="tcp://localhost:2375"
     - docker version
     - docker build -t "$IMAGE_NAME:latest" .
