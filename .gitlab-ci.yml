@@ -12,8 +12,7 @@ variables:
 build_image_job:
   stage: build
   image: google/cloud-sdk
-  # tags:
-  #   - docker
   script:
+    - export DOCKER_HOST="tcp://localhost:2375"
     - docker version
     - docker build -t "$IMAGE_NAME:latest" .
