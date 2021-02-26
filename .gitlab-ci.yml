@@ -6,9 +6,6 @@ variables:
   DOCKER_DRIVER: overlay
   IMAGE_NAME: "harbor.hw.codes/sre/cluster-tool"
 
-  # setup following variables on Setting/CICD page
-  # DOCKER_PASSWORD
-
 stages:
   - build
 
@@ -20,7 +17,6 @@ before_script:
 build_image_job:
   stage: build
   script:
-    # - export DOCKER_HOST="tcp://localhost:2375"
     - docker version
     - docker build -t "$IMAGE_NAME:latest" .
     - docker image push "$IMAGE_NAME:latest"
