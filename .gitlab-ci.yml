@@ -14,7 +14,7 @@ stages:
 
 before_script:
   - docker info
-  - echo "$DOCKER_PASSWORD"| docker login --username 'builder$k8s' --password-stdin
+  - echo "$DOCKER_PASSWORD"| docker login harbor.hw.codes --username 'robot$builder' --password-stdin
 
 
 build_image_job:
