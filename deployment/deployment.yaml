@@ -17,7 +17,7 @@ metadata:
   labels:
     app: cluster-tool
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: cluster-tool
@@ -28,11 +28,16 @@ spec:
     spec:
       containers:
         - name: cluster-tool
-          image: harbor.hw.codes/sre/cluster-tool:1.0.0 
+          image: harbor.hw.codes/sre/cluster-tool:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
           command:
             - /app/tool
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
       imagePullSecrets:
         - name: regcred

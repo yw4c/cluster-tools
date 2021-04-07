@@ -21,3 +21,7 @@ build_image_job:
     - docker build -t "$IMAGE_NAME:latest" .
     - docker image push "$IMAGE_NAME:latest"
 
+# deploy_job:
+#   stage: deploy
+#   image: harbor.hw.codes/sre/deploy-tool
+#   script:
