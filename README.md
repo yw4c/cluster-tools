@@ -18,3 +18,11 @@ grpcurl -rpc-header x-request-id:example-request-id -plaintext -d '{"ParamOne": 
 ````sh
 nc myhost myport -v -z
 ````
+
+# Service
+* http
+```
+curl http://your-host/cluster-tool/info
+```
+* websocket: 
+    * Modify host in ./ws-cli.html and execute, monitor whether it be disconnected by HTTP Timeout of server
