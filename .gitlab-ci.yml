@@ -4,7 +4,7 @@ services:
 variables:
   DOCKER_HOST: tcp://localhost:2375/
   DOCKER_DRIVER: overlay
-  IMAGE_NAME: "harbor.hw.codes/sre/cluster-tool"
+  IMAGE_NAME: "harbor.hw.codes/ares/cluster-tool"
 
 stages:
   - build
