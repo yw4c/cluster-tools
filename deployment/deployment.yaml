@@ -6,7 +6,7 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8080
+      targetPort: 8081
   selector:
     app: cluster-tool
 ---
@@ -31,7 +31,7 @@ spec:
           image: harbor.hw.codes/sre/cluster-tool:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - containerPort: 8081
           command:
             - /app/tool
           env:
