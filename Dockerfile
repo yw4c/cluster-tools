@@ -17,4 +17,4 @@ FROM alpine:3
 RUN apk update && apk upgrade && \
     apk add --no-cache git bash curl mysql-client redis
 COPY --from=builder /app/tool /app/tool
-COPY --from=builder /app/grpcurl /app/grpcurl
+COPY --from=builder2 /app/grpcurl /app/grpcurl
