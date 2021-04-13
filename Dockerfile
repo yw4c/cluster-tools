@@ -6,8 +6,7 @@ ENV GO111MODULE=on
 ENV CGO_ENABLED=0
 RUN go build -ldflags="-X config.versionTag=$(git describe --tags)" -mod=vendor -v -o tool main.go
 # grpcurl
-RUN cd $GOPATH && \
-    go get github.com/fullstorydev/grpcurl/... && \
+RUN go get github.com/fullstorydev/grpcurl/... && \
     go install github.com/fullstorydev/grpcurl/cmd/grpcurl
 COPY $GOPATH/bin/grpcurl /app/grpcurl
 
