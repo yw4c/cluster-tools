@@ -8,8 +8,8 @@ RUN go build -ldflags="-X config.versionTag=$(git describe --tags)" -mod=vendor 
 
 FROM golang:alpine as builder2
 WORKDIR /app
-RUN go get github.com/fullstorydev/grpcurl/... 
-RUN  go install github.com/fullstorydev/grpcurl/cmd/grpcurl:latest
+RUN go get github.com/fullstorydev/grpcurl/...
+RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
 COPY $GOPATH/bin/grpcurl /app/grpcurl
 
 ######## Image ########
