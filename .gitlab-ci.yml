@@ -14,7 +14,7 @@ before_script:
   - echo "$DOCKER_PASSWORD"| docker login harbor.hw.codes --username 'robot$builder' --password-stdin
 
 
-build_image_job:
+build_dev_image_job:
   stage: build
   only:
     - dev
@@ -24,7 +24,7 @@ build_image_job:
     - docker image push "$IMAGE_NAME:latest"
 
 
-build_image_job:
+build_tag_image_job:
   stage: build
   only:
     - /^UAT.*$/
