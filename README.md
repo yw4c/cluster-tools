@@ -25,4 +25,7 @@ nc myhost myport -v -z
 curl http://your-host/cluster-tool/info
 ```
 * websocket: 
-    * Modify host in ./ws-cli.html and execute, monitor whether it be disconnected by HTTP Timeout of server
+```
+ws://your-host/cluster-tool/ping
+```
+

@@ -40,14 +40,14 @@ build_image_job:
 #   image: harbor.hw.codes/sre/deploy-tool
 #   script:
 
-deploy_helm_package_agent:
-  stage: deploy
-  image: docker pull traherom/kustomize-docker:2.0.0
-  tags:
-    - docker
-  only:
-    - dev
-  environment:
-    name: dev
-    url: https://your-domain.com
-  script:
+# deploy_helm_package_agent:
+#   stage: deploy
+#   image: docker pull traherom/kustomize-docker:2.0.0
+#   tags:
+#     - docker
+#   only:
+#     - dev
+#   environment:
+#     name: dev
+#     url: https://your-domain.com
+#   script:
