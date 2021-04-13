@@ -16,6 +16,8 @@ before_script:
 
 build_image_job:
   stage: build
+  only:
+    - dev
   script:
     - docker version
     - docker build -t "$IMAGE_NAME:latest" .
