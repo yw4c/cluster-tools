@@ -10,7 +10,7 @@ FROM golang:alpine as builder2
 WORKDIR /app
 RUN go get github.com/fullstorydev/grpcurl/...
 RUN go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest
-COPY $GOPATH/bin/grpcurl /app/grpcurl
+COPY /go/bin/grpcurl /app/grpcurl
 
 ######## Image ########
 FROM alpine:3

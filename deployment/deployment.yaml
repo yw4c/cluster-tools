@@ -5,8 +5,10 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-    - port: 80
-      targetPort: 8081
+      # service port
+    - port: 80 
+      # container port
+      targetPort: 8081 
   selector:
     app: cluster-tool
 ---
@@ -17,7 +19,7 @@ metadata:
   labels:
     app: cluster-tool
 spec:
-  replicas: 2
+  replicas: 2 # pod 數量
   selector:
     matchLabels:
       app: cluster-tool
@@ -28,13 +30,17 @@ spec:
     spec:
       containers:
         - name: cluster-tool
-          image: harbor.hw.codes/sre/cluster-tool:latest
+          # 改為你的 Harbor image
+          image: harbor.hw.codes/<項目>/cluster-tool:latest 
+          # 每次 redeploy 都會去重新拉
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
-          command:
-            - /app/tool
-          env:
+          # 啟動應用的指令
+          command: 
+            - /app/tool 
+          # 加入環境變數
+          env: 
             - name: NODE_NAME
               valueFrom:
                 fieldRef:
@@ -43,5 +49,5 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.name
-      imagePullSecrets:
+      imagePullSecrets: 
         - name: regcred
