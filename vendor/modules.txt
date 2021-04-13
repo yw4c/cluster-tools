@@ -24,6 +24,8 @@ github.com/gorilla/websocket
 # github.com/json-iterator/go v1.1.10
 ## explicit
 github.com/json-iterator/go
+# github.com/kr/pretty v0.1.0
+## explicit
 # github.com/leodido/go-urn v1.2.1
 ## explicit
 github.com/leodido/go-urn
@@ -75,6 +77,8 @@ google.golang.org/protobuf/reflect/protoreflect
 google.golang.org/protobuf/reflect/protoregistry
 google.golang.org/protobuf/runtime/protoiface
 google.golang.org/protobuf/runtime/protoimpl
+# gopkg.in/check.v1 v1.0.0-20190902080502-41f04d3bba15
+## explicit
 # gopkg.in/yaml.v2 v2.4.0
 ## explicit
 gopkg.in/yaml.v2
