@@ -17,6 +17,7 @@ func main() {
 			"client IP": c.ClientIP(),
 			"egress IP": getEgressIP(),
 			"POD NAME":  os.Getenv("POD_NAME"),
+			"NODE NAME": os.Getenv("NODE_NAME"),
 		})
 	})
 	r.GET("cluster-tool/ping", ping)

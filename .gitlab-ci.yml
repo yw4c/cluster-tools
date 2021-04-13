@@ -23,7 +23,31 @@ build_image_job:
     - docker build -t "$IMAGE_NAME:latest" .
     - docker image push "$IMAGE_NAME:latest"
 
+
+build_image_job:
+  stage: build
+  only:
+    - /^UAT.*$/
+    - /^PROD.*$/
+  script:
+    - docker version
+    - docker build -t "$IMAGE_NAME:$CI_COMMIT_TAG" .
+    - docker image push "$IMAGE_NAME:$CI_COMMIT_TAG"
+
+
 # deploy_job:
 #   stage: deploy
 #   image: harbor.hw.codes/sre/deploy-tool
 #   script:
+
+deploy_helm_package_agent:
+  stage: deploy
+  image: docker pull traherom/kustomize-docker:2.0.0
+  tags:
+    - docker
+  only:
+    - dev
+  environment:
+    name: dev
+    url: https://your-domain.com
+  script:
