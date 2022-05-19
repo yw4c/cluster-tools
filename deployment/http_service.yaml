@@ -1,0 +1,43 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: cluster-tool
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8081 
+  selector:
+    app: cluster-tool
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cluster-tool
+  labels:
+    app: cluster-tool
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cluster-tool
+  template:
+    metadata:
+      labels:
+        app: cluster-tool
+    spec:
+      containers:
+        - name: cluster-tool
+          image: yw4code/cluster-tool:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          command: 
+            - /app/tool
+            - http
+            - --8081
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
