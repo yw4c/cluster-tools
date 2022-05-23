@@ -1,7 +1,9 @@
 package http
 
 import (
+	"cluster-tools/model"
 	"cluster-tools/service"
+	"log"
 	"net/http"
 	"os"
 
@@ -27,11 +29,19 @@ func NewObserveServer(service service.IObserveService) (server *Observe) {
 
 
 func (o *Observe) ObserveStatus(c *gin.Context) {
-	c.JSON(200, gin.H{
-		"xff":       c.Request.Header.Get("X-Forwarded-For"),
-		"egress_ip": o.ObserveService.GetEgressIP(),
-		"pod_name":  os.Getenv("POD_NAME"),
+
+	upstream, err := o.ObserveService.GetUpstreamInfo(c, c.Request)
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	c.JSON(200, &model.ObserveStatusResponse{
+		Xff:           c.Request.Header.Get("X-Forwarded-For"),
+		EgressAddress: o.ObserveService.GetEgressIP(),
+		PodName:       os.Getenv("POD_NAME"),
+		Upstream:      upstream,
 	})
+
 }
 
 func (o *Observe) ping(c *gin.Context) {

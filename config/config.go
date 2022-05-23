@@ -8,12 +8,12 @@ import (
 )
 
 var (
-	appPath = "/app"
-	once sync.Once
+	appPath  = "/app"
+	once     sync.Once
 	instance *Config
 )
 
-func GetConfigInstance() *Config{
+func GetConfigInstance() *Config {
 	once.Do(func() {
 		viper.SetConfigName("env")
 		if envPath := os.Getenv("CLUSTER_TOOL_PATH"); envPath != "" {
@@ -23,8 +23,10 @@ func GetConfigInstance() *Config{
 		viper.SetConfigType("yaml")
 		if err := viper.ReadInConfig(); err != nil {
 			log.Fatal("read env file failed. ", err.Error())
-
 		}
+		instance = &Config{}
+		viper.UnmarshalExact(instance)
+
 	})
 
 	return instance
@@ -32,7 +34,7 @@ func GetConfigInstance() *Config{
 
 type Config struct {
 	UpstreamGRPC struct {
-		Port int
-		Host string
-	}
+		Port int    `mapstructure:"port"`
+		Host string `mapstructure:"host"`
+	} `mapstructure:"upstream_grpc"`
 }

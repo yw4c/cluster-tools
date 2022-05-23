@@ -13,6 +13,14 @@ type IApp interface {
 	Run(TRegisterProviderFunc)
 }
 
+type TRegisterProviderFunc func (app IApp)
+
+var RegisterProvidersFunc = func(app IApp) {
+	app.registerSDKProvider()
+	app.registerServiceProvider()
+	app.registerServerProvider()
+}
+
 type baseApp struct{}
 
 func (*baseApp) registerSDK() {
@@ -33,10 +41,3 @@ func (*baseApp) registerService() {
 	})
 }
 
-type TRegisterProviderFunc func (app IApp)
-
-var RegisterProvidersFunc = func(app IApp) {
-	app.registerSDKProvider()
-	app.registerServiceProvider()
-	app.registerServerProvider()
-}

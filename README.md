@@ -38,7 +38,7 @@ nc myhost myport -v -z
 # Service
 * http 
 ```
-curl http://your-host/cluster-tool/info
+curl http://localhost:8081/observe/info  --header "X-Request-ID: test"
 ```
 * websocket: 
 ```

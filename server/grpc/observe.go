@@ -5,7 +5,9 @@ import (
 	"cluster-tools/pb"
 	"cluster-tools/service"
 	"context"
+	"log"
 	"os"
+	"strings"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -29,6 +31,8 @@ func (o Observe) GetStatus(ctx context.Context, request *pb.GetStatusRequest) (*
 	if !ok {
 		return nil, status.Error(codes.Internal, "get metadata fail")
 	}
+	log.Println(md.Get(strings.ToLower(strings.ToLower(c.XRequestID))))
+
 
 	metadataHead := []string{
 		c.XRequestID,
@@ -37,7 +41,8 @@ func (o Observe) GetStatus(ctx context.Context, request *pb.GetStatusRequest) (*
 	}
 	metadataMap := make(map[string]string)
 	for _, v := range metadataHead {
-		if ids := md.Get(v); len(ids) > 0 {
+		if ids := md.Get(strings.ToLower(v)); len(ids) > 0 {
+
 			metadataMap[v] = ids[0]
 		}
 	}
@@ -48,6 +53,7 @@ func (o Observe) GetStatus(ctx context.Context, request *pb.GetStatusRequest) (*
 		SpanID:     metadataMap[c.XB3SpanID],
 		PodID:      os.Getenv("POD_NAME"),
 	}
+	log.Printf("%#v", resp)
 	return resp, nil
 
 }

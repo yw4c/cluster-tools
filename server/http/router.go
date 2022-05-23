@@ -20,7 +20,7 @@ func NewRouter() *gin.Engine {
 	r := gin.Default()
 	v1 := r.Group("observe")
 	v1.GET("info", observeServer.ObserveStatus)
-	v1.GET("ping", observeServer.ping)
+	v1.GET("ws-ping", observeServer.ping)
 	//r.GET("ping", s.ping)
 	return r
 }

@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gorilla/websocket v1.4.2
+	github.com/pkg/errors v0.8.1
 	github.com/spf13/cobra v1.3.0
 	github.com/spf13/viper v1.10.1
 	go.uber.org/dig v1.14.1
