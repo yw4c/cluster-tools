@@ -13,14 +13,13 @@ import (
 )
 
 type IUpstreamSDK interface {
-	GetStatus(ctx context.Context, md metadata.MD)(*pb.GetStatusResponse, error)
+	GetStatus(ctx context.Context, md metadata.MD) (*pb.GetStatusResponse, error)
 }
 
 var (
-	upstreamOnce sync.Once
+	upstreamOnce     sync.Once
 	upstreamInstance IUpstreamSDK
 )
-
 
 func NewUpstreamSDK() IUpstreamSDK {
 	upstreamOnce.Do(func() {

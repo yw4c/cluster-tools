@@ -15,13 +15,13 @@ type IObserveService interface {
 
 func NewObserveService(sdkUpstream sdk.IUpstreamSDK, sdkEgress sdk.IEgressAddress) IObserveService {
 	return &observeService{
-		sdkUpstream: sdkUpstream,
+		sdkUpstream:      sdkUpstream,
 		sdkEgressAddress: sdkEgress,
 	}
 }
 
 type observeService struct {
-	sdkUpstream sdk.IUpstreamSDK
+	sdkUpstream      sdk.IUpstreamSDK
 	sdkEgressAddress sdk.IEgressAddress
 }
 

@@ -57,11 +57,11 @@ var (
 
 // Export origin func of errors
 var (
-	Unwrap = errors.Unwrap
-	Is = errors.Is
-	As   = errors.As
-	Wrap = pkgErrors.Wrap
-	New  = pkgErrors.New
+	Unwrap       = errors.Unwrap
+	Is           = errors.Is
+	As           = errors.As
+	Wrap         = pkgErrors.Wrap
+	New          = pkgErrors.New
 	Cause        = pkgErrors.Cause
 	WithMessage  = pkgErrors.WithMessage
 	WithMessagef = pkgErrors.WithMessagef

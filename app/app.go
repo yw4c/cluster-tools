@@ -13,7 +13,7 @@ type IApp interface {
 	Run(TRegisterProviderFunc)
 }
 
-type TRegisterProviderFunc func (app IApp)
+type TRegisterProviderFunc func(app IApp)
 
 var RegisterProvidersFunc = func(app IApp) {
 	app.registerSDKProvider()
@@ -40,4 +40,3 @@ func (*baseApp) registerService() {
 		return service.NewObserveService(sdkUpstream, sdkEgress)
 	})
 }
-

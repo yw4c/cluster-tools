@@ -11,8 +11,6 @@ var (
 	Providers  []interface{}
 )
 
-
-
 func GetDIInstance() *dig.Container {
 	onceDI.Do(func() {
 		c := dig.New()
@@ -23,4 +21,3 @@ func GetDIInstance() *dig.Container {
 	})
 	return instanceDI
 }
-

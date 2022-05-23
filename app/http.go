@@ -32,8 +32,6 @@ func (s *HttpApp) registerServerProvider() {
 	})
 }
 
-
-
 func (s *HttpApp) Run(register TRegisterProviderFunc) {
 
 	register(s)

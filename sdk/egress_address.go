@@ -10,7 +10,6 @@ type IEgressAddress interface {
 }
 
 type EgressAddress struct {
-
 }
 
 func (e EgressAddress) Get() string {
@@ -31,6 +30,6 @@ func (e EgressAddress) Get() string {
 	}
 }
 
-func NewEgressAddress() IEgressAddress{
+func NewEgressAddress() IEgressAddress {
 	return &EgressAddress{}
 }

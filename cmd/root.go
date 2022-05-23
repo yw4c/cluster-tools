@@ -24,7 +24,7 @@ var rootCmd = &cobra.Command{
 		log.Println("start with command " + cmd.Use)
 	},
 	PersistentPostRun: func(cmd *cobra.Command, args []string) {
-		quit := make(chan os.Signal)
+		quit := make(chan os.Signal, 1)
 		signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM, syscall.SIGQUIT)
 		<-quit
 		log.Println("Shutting down server...")

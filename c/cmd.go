@@ -6,4 +6,3 @@ const (
 	GRPC Cmd = "grpc"
 	HTTP Cmd = "http"
 )
-

@@ -19,14 +19,13 @@ type Observe struct {
 func NewObserveServer(service service.IObserveService) (server *Observe) {
 	return &Observe{
 		ObserveService: service,
-		upGrader:  websocket.Upgrader{
+		upGrader: websocket.Upgrader{
 			CheckOrigin: func(r *http.Request) bool {
 				return true
 			},
 		},
 	}
 }
-
 
 func (o *Observe) ObserveStatus(c *gin.Context) {
 
@@ -56,7 +55,8 @@ func (o *Observe) ping(c *gin.Context) {
 		// Read received messages
 		mt, message, err := ws.ReadMessage()
 		if err != nil {
-			break
+			c.AbortWithError(500, err)
+			return
 		}
 		if string(message) == "ping" {
 			message = []byte("pong")
@@ -64,7 +64,8 @@ func (o *Observe) ping(c *gin.Context) {
 		// write response message
 		err = ws.WriteMessage(mt, message)
 		if err != nil {
-			break
+			c.AbortWithError(500, err)
+			return
 		}
 	}
 }
