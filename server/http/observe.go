@@ -2,8 +2,8 @@ package http
 
 import (
 	"cluster-tools/model"
+	"cluster-tools/pkg/errors"
 	"cluster-tools/service"
-	"log"
 	"net/http"
 	"os"
 
@@ -31,7 +31,7 @@ func (o *Observe) ObserveStatus(c *gin.Context) {
 
 	upstream, err := o.ObserveService.GetUpstreamInfo(c, c.Request)
 	if err != nil {
-		log.Println(err.Error())
+		errors.StackTrace(err)
 	}
 
 	c.JSON(200, &model.ObserveStatusResponse{

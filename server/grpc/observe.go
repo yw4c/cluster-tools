@@ -48,7 +48,7 @@ func (o Observe) GetStatus(ctx context.Context, request *pb.GetStatusRequest) (*
 		XRequestID: metadataMap[c.XRequestID],
 		TraceID:    metadataMap[c.XB3TraceID],
 		SpanID:     metadataMap[c.XB3SpanID],
-		PodID:      os.Getenv("POD_NAME"),
+		PodName:    os.Getenv("POD_NAME"),
 	}
 	return resp, nil
 

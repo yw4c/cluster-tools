@@ -1,0 +1,6 @@
+secretGenerator:
+  - name: env-file
+    files:
+      - env.yaml
+generatorOptions:
+  disableNameSuffixHash: true

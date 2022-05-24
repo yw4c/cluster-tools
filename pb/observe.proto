@@ -10,15 +10,15 @@ service ObserveService {
 message GetStatusRequest {}
 
 message GetStatusResponse{
-  string PodID = 1;
-  string XRequestID = 2;
-  string TraceID = 3;
-  string SpanID = 4;
+  string podName = 1;
+  string xRequestID = 2;
+  string traceID = 3;
+  string spanID = 4;
 }
 
 message MockOptionRequest {
-  uint64 InjectTimeout = 1; // infect timeout with second
-  uint32 InjectErrorCode = 2; // inject error with gRPC error code
+  uint64 injectTimeout = 1; // infect timeout with second
+  uint32 injectErrorCode = 2; // inject error with gRPC error code
   float burnVCPU = 3;
   float burnGMEM = 4;
 }

@@ -2,29 +2,23 @@
     <head>
         <script>
             var ws = new WebSocket("ws://localhost:8081/observe/ws-ping");
-            //连接打开时触发 
             ws.onopen = function(evt) {
                 console.log("Connection open ...");  
                 keepAlive();  
-            };  
-
+            };
             function keepAlive() {
                 var timeout = 10000;  
                 if (ws.readyState == ws.OPEN) {  
                     ws.send('ping');  
                 }
                 timerId = setTimeout(keepAlive, timeout);  
-            }  
-
-            //接收到消息时触发  
-            ws.onmessage = function(evt) {  
+            }
+            ws.onmessage = function(evt) {
                 console.log("Received Message: " + evt.data);  
-            };  
-            //连接关闭时触发  
+            };
             ws.onclose = function(evt) {  
                 console.log("Connection closed.");  
-            }; 
-            
+            };
             </script>
     </head>
 </html>

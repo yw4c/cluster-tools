@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8081 
+  selector:
+    app: api-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-service
+  labels:
+    app: api-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-service
+  template:
+    metadata:
+      labels:
+        app: api-service
+    spec:
+      containers:
+        - name: api-service
+          image: yw4code/cluster-tool:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          command: 
+            - /app/tool
+            - http
+            - --port=8081
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+          volumeMounts:
+            - mountPath: /app/env.yaml
+              name: config
+              subPath: env.yaml
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25
+      volumes:
+        - name: config
+          secret:
+            defaultMode: 420
+            secretName: env-file

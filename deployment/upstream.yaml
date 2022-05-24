@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: upstream-service
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8081
+  selector:
+    app: upstream-service
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: upstream-service
+  labels:
+    app: upstream-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: upstream-service
+  template:
+    metadata:
+      labels:
+        app: upstream-service
+    spec:
+      containers:
+        - name: upstream-service
+          image: yw4code/cluster-tool:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8081
+          command:
+            - /app/tool
+            - grpc
+            - --port=8081
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+          volumeMounts:
+            - mountPath: /app/env.yaml
+              name: config
+              subPath: env.yaml
+      nodeSelector:
+        cloud.google.com/gke-spot: "true"
+      terminationGracePeriodSeconds: 25
+      volumes:
+        - name: config
+          secret:
+            defaultMode: 420
+            secretName: env-file

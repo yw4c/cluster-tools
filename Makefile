@@ -5,7 +5,6 @@ static:
 	go vet `go list ./... | grep -v ./vendor/...`
 
 upgrade:
-	@static
 	docker build -t "${IMAGE_NAME}:latest" .
 	docker image push "${IMAGE_NAME}:latest"
 
