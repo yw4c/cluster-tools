@@ -6,7 +6,10 @@ spec:
   type: ClusterIP
   ports:
     - port: 80
-      targetPort: 8081 
+      targetPort: 8081
+      protocol: TCP
+      name: http
+
   selector:
     app: api-service
 ---
@@ -32,7 +35,9 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
-          command: 
+              name: http
+              protocol: TCP
+          command:
             - /app/tool
             - http
             - --port=8081
@@ -49,8 +54,6 @@ spec:
             - mountPath: /app/env.yaml
               name: config
               subPath: env.yaml
-      nodeSelector:
-        cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
       volumes:
         - name: config
