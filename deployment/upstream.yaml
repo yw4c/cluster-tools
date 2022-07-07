@@ -7,6 +7,8 @@ spec:
   ports:
     - port: 80
       targetPort: 8081
+      protocol: TCP
+      name: grpc
   selector:
     app: upstream-service
 ---
@@ -32,6 +34,8 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8081
+              name: grpc
+              protocol: TCP
           command:
             - /app/tool
             - grpc
@@ -49,8 +53,6 @@ spec:
             - mountPath: /app/env.yaml
               name: config
               subPath: env.yaml
-      nodeSelector:
-        cloud.google.com/gke-spot: "true"
       terminationGracePeriodSeconds: 25
       volumes:
         - name: config
