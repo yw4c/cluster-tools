@@ -1,27 +1,14 @@
-apiVersion: networking.istio.io/v1alpha3
-kind: Gateway
-metadata:
-  name: api-gateway
-spec:
-  selector:
-    istio: ingressgateway # use Istio default gateway implementation
-  servers:
-    - port:
-        number: 80
-        name: http
-        protocol: HTTP
-      hosts:
-        - "test-cluster-lb.com"
----
+
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: http-path
+  namespace: istio-system
 spec:
   hosts:
-    - "test-cluster-lb.com"
+    - "*"
   gateways:
-    - api-gateway
+    - my-gateway
   http:
     - match:
         - uri:
@@ -31,7 +18,7 @@ spec:
       timeout: 2s
       route:
         - destination:
-            host: api-service
+            host: api-service.default.svc.cluster.local
             port:
               number: 80
       corsPolicy:
@@ -46,18 +33,21 @@ spec:
         allowCredentials: true
         allowHeaders:
           - "*"
+      retries:
+        attempts: 0
 ---
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
   name: upstream-service
+  namespace: istio-system
 spec:
   hosts:
-    - upstream-service
+    - upstream-service.default.svc.cluster.local
   http:
     - route:
         - destination:
-            host: upstream-service
+            host: upstream-service.default.svc.cluster.local
             port:
               number: 80
       retries:

@@ -1,10 +1,11 @@
 package config
 
 import (
-	"github.com/spf13/viper"
 	"log"
 	"os"
 	"sync"
+
+	"github.com/spf13/viper"
 )
 
 var (
@@ -37,4 +38,5 @@ type Config struct {
 		Port int    `mapstructure:"port"`
 		Host string `mapstructure:"host"`
 	} `mapstructure:"upstream_grpc"`
+	EgressIpURL string `mapstructure:"egress_sdk_url"`
 }

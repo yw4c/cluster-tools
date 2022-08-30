@@ -4,4 +4,3 @@ resources:
   - api.yaml
   - upstream.yaml
   - config
-  - istio.yaml

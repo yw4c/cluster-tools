@@ -1,6 +1,7 @@
 package sdk
 
 import (
+	"cluster-tools/config"
 	"io/ioutil"
 	"net/http"
 )
@@ -14,7 +15,7 @@ type EgressAddress struct {
 
 func (e EgressAddress) Get() string {
 	client := &http.Client{}
-	req, err := http.NewRequest("GET", "https://api.myip.com", nil)
+	req, err := http.NewRequest("GET", config.GetConfigInstance().EgressIpURL, nil)
 	if err != nil {
 		return ""
 	}

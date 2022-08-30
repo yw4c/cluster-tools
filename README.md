@@ -48,30 +48,14 @@ curl -X GET http://localhost:8080/observe/info
 ```
 
 ### Websocket Ping 
-* To ensure websocket goes well
 ```shell
 GET /observe/ws-ping
 ```
-we can make a client easily by javascript
-```javascript
-            var ws = new WebSocket("ws://localhost:8081/observe/ws-ping");
-            ws.onopen = function(evt) {
-                console.log("Connection open ...");  
-                keepAlive();  
-            };
-            function keepAlive() {
-                var timeout = 10000;  
-                if (ws.readyState == ws.OPEN) {  
-                    ws.send('ping');  
-                }
-                timerId = setTimeout(keepAlive, timeout);  
-            }
-            ws.onmessage = function(evt) {  
-                console.log("Received Message: " + evt.data);  
-            };
-            ws.onclose = function(evt) {  
-                console.log("Connection closed.");  
-            };
+
+* Validate connection
+```bash
+    brew install websocat
+    websocat ws://localhost/observe/ws-ping
 ```
 
 
@@ -87,13 +71,13 @@ redis-cli -h myhost -p 6379 ping
 
 * grpcurl
 ````sh
-grpcurl -plaintext myhost:9090 list
-grpcurl -plaintext -rpc-header X-Request-ID:test -plaintext -d '{"ParamOne": "1", "ParamTwo": "1"}' localhost:8081 observe.ObserveService/GetStatus
+/app/grpcurl -plaintext myhost:9090 list
+/app/grpcurl -plaintext -rpc-header X-Request-ID:test -plaintext -d '{"ParamOne": "1", "ParamTwo": "1"}' localhost:8081 observe.ObserveService/GetStatus
 ````
 
 * nc
 ````sh
-nc myhost myport -v -z
+nc <host> <port> -v -z
 ````
 
 
